@@ -6,10 +6,12 @@
         </encoder>
     </appender>
 
-    <logger name="org.hibernate.type" level="ERROR" />
-    <logger name="org.hibernate" level="ERROR" />
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.hibernate.type" level="ERROR"/>
+    <logger name="org.hibernate.SQL" level="ERROR"/>
+    <logger name="org.hibernate.type.descriptor.sql" level="ERROR"/>
 
     <root level="INFO">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

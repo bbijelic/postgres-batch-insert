@@ -79,3 +79,18 @@ More on this link: [ReWriteBatchedInserts Tutorial](http://https://vladmihalcea.
 | Records | 10  | 100  | 1000  | 10000   | 100000 | 500000 | 1000000  |
 | :------------| :------------ | :------------ | :------------ | :------------ | :------------ | :------------ | :------------ |
 | Duration (ms) |  100  | 73   |  327  | 1177   | 6906 | 37146 | 71301  |
+
+# Batch Size Benchmark
+
+Obvious winner of the benchmark ofcourse is the multiline setup with batch feature. Now, we need determine how Postgres behaves for different values of batch size against records.
+
+Postgres JDBC driver rewrites INSERT statements into multiline ones, but number of records stored per multiline statement can only be power of 2, so power of 2 values for the batch size are chosen.
+
+For example, batch size of 10 would be split into two multiline INSERT's since first lower power of 2 is 8. First insert would have 8 records, and second only 2 record, which totals batch of 10.
+
+
+![](http://i66.tinypic.com/2hz7as6.png)
+
+## Conclusion
+
+For larger numbers of records, larger batch sizes are better, but from benchmark it can be observed that batch size of 1024 is the sweetspot. One would benefit very low or none from batch size of 2024.
